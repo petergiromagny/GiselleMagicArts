@@ -1,0 +1,18 @@
+CREATE TABLE IF NOT EXISTS `ingredients` (
+  `IDIngredient` int(8) NOT NULL AUTO_INCREMENT,
+  `NomIngredient` varchar(32) DEFAULT NULL,
+  `QuantiteIngredient` int(8) DEFAULT NULL,
+  `FraicheurIngredient` int(11) DEFAULT NULL,
+  `PrixIngredient` int(11) DEFAULT NULL,
+  `StockIngredient` int(11) DEFAULT NULL,
+  PRIMARY KEY (`IDIngredient`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `ingredients`
+--
+
+INSERT INTO `ingredients` (`NomIngredient`, `QuantiteIngredient`, `FraicheurIngredient`,`PrixIngredient`,`StockIngredient`) VALUES
+('poire',15,3,500,15),
+('banane',2,2,1000,2),
+('pomme',7,1,17,7);
