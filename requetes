@@ -1,19 +1,22 @@
 --------------------------procedure stocké numero 1
 
- SET @nbr_ajout := 2;--variable representant le nombre d'ajout d'un produit que l'on connait l'ID (exemple = 4)
-
-
-DELIMITER | -- On change le délimiteur
-CREATE PROCEDURE affichage_stocks()    
-    -- toujours pas de paramètres, toujours des parenthèses
+ DELIMITER | -- On change le délimiteur
+CREATE PROCEDURE affichage_stocks(in IDIngredient_add int, in nbr_add int)    
+    
 BEGIN
-    select NomIngredient,StockIngredient -- affichage du stock
+    	
+    select 'avant' , NomIngredient,StockIngredient -- affichage du stock
     from ingredients;
 
     update ingredients
-    set StockIngredient = StockIngredient +  @espece_id
-    where IDIngredient = 4;
+    set StockIngredient = StockIngredient +  nbr_add
+    where IDIngredient = IDIngredient_add;
+
+    select 'aprés' , NomIngredient,StockIngredient -- affichage du stock aprés
+    from ingredients;
+  
 END|   
+Delimiter ;
 
 --------------------------fin procedure stocké numero 1
 
