@@ -20,4 +20,26 @@ Delimiter ;
 
 --------------------------fin procedure stocké numero 1
 
+--------------------------procedure stocké numero 4
+
+
+ -- On change le délimiteur
+  DELIMITER |
+CREATE PROCEDURE command(in IDCommand_add int)    
+  
+BEGIN
+    update commande
+    set StatutCommande = 'en cours'
+    where IDCommande = IDCommand_add;
+    
+   update ingredients
+    set StockIngredient = StockIngredient - 1
+    where IDIngredient = #a trouver car cela vient de la recette alirs je sais pas #
+  
+END|   
+Delimiter ;
+
+
+
+--------------------------fin procedure stocké numero 4
 
