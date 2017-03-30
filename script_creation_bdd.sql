@@ -136,13 +136,13 @@ CREATE TABLE Proposition(
 #------------------------------------------------------------
 
 CREATE TABLE se_compose(
-        QuantiteIngredient Int ,
-        FraicheurMax       Int NOT NULL ,
-        FraicheurMin       Int NOT NULL ,
+        QuantiteIngredient Int NOT NULL ,
+        FraicheurMax       Int ,
+        FraicheurMin       Int ,
         IDIngredient       Int NOT NULL ,
-        IDPotion           Int NOT NULL ,
-        IDProposition      Int NOT NULL ,
-        IDOnguent          Int NOT NULL ,
+        IDPotion           Int ,
+        IDProposition      Int ,
+        IDOnguent          Int ,
         PRIMARY KEY (IDIngredient ,IDPotion ,IDProposition ,IDOnguent )
 )ENGINE=InnoDB;
 
