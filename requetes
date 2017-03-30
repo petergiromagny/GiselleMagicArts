@@ -1,31 +1,140 @@
+
+--
+-- Structure de la table `ingrédients`
+--
+
+CREATE TABLE IF NOT EXISTS `ingredients` (
+  `IDIngredient` int(8) NOT NULL AUTO_INCREMENT,
+  `NomIngredient` varchar(32) DEFAULT NULL,
+  `QuantiteIngredient` int(8) DEFAULT NULL,
+  `FraicheurIngredient` int(11) DEFAULT NULL,
+  `PrixIngredient` float(11) DEFAULT NULL,
+  `StockIngredient` int(11) DEFAULT NULL,
+  PRIMARY KEY (`IDIngredient`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `ingredients`
+--
+
+INSERT INTO `ingredients` (`NomIngredient`, `QuantiteIngredient`, `FraicheurIngredient`,`PrixIngredient`,`StockIngredient`) VALUES
+('poire',15,3,500,15),
+('banane',2,2,1000.47,2),
+('mangue',12,1,19,7),
+('pomme',7,1,17,7);
+
+
+
+
+
+
+
+
+--
+-- Contenu de la table `ingredients`
+--
+
+INSERT INTO `ingredients` (`NomIngredient`, `QuantiteIngredient`, `FraicheurIngredient`,`PrixIngredient`,`StockIngredient`) VALUES
+('poire',15,3,500,15),
+('banane',2,2,1000,2),
+('pomme',7,1,17,7);
+
+
+
+
+
+
+
 --------------------------procedure stocké numero 1
 
- DELIMITER | -- On change le délimiteur
+ //SET @nbr_ajout := 2;--variable representant le nombre d'ajout d'un produit que l'on connait l'ID (exemple = 4)
+
+
+DELIMITER | -- On change le délimiteur
 CREATE PROCEDURE affichage_stocks(in IDIngredient_add int, in nbr_add int)    
     
 BEGIN
     	
     select 'avant' , NomIngredient,StockIngredient -- affichage du stock
-    from ingredients;
+    from Ingredients;
 
-    update ingredients
+    update Ingredients
     set StockIngredient = StockIngredient +  nbr_add
     where IDIngredient = IDIngredient_add;
 
     select 'aprés' , NomIngredient,StockIngredient -- affichage du stock aprés
-    from ingredients;
+    from Ingredients;
   
 END|   
 Delimiter ;
 
+
+
 --------------------------fin procedure stocké numero 1
+
+
+
+
+
+
+--------------------------procedure stocké numero 2
+-- commande d un client
+
+
+DELIMITER |
+CREATE PROCEDURE command_client(in IDClient_add int)    
+
+begin
+select contient.IDIngredient , contient.IDPotion ,contient.IDOnguent, Commande.IDClient
+from contient , Client , Commande
+where Client.IDClient = Commande.IDClient
+and Commande.IDCommande = contient.IDCommande
+and Client.IDClient = IDClient_add;
+
+ 
+end
+Delimiter ;
+
+
+
+
+
+
+--------------------------fin procedure stocké numero 2
+
+
+
+
+
+
+
+--------------------------procedure stocké numero 3
+DELIMITER |
+CREATE PROCEDURE froid()    
+
+begin
+select *,' fut supprimé'
+from Stock
+where Fraicheur=0;
+delete from Stock where Fraicheur=0;
+
+
+end|
+Delimiter ;
+
+
+--------------------------fin procedure stocké numero 3
+
+
+
+
 
 --------------------------procedure stocké numero 4
 
 
  -- On change le délimiteur
   DELIMITER |
-CREATE PROCEDURE command(in IDCommand_add int)    
+CREATE PROCEDURE envoi_command(in IDCommand_add int)    
   
 BEGIN
     update commande
@@ -42,4 +151,6 @@ Delimiter ;
 
 
 --------------------------fin procedure stocké numero 4
+
+CREATE TABLE IF NOT EXISTS `my_table` ();
 
