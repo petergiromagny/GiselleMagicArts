@@ -126,8 +126,9 @@ CREATE TABLE Inventeur(
 CREATE TABLE Proposition(
         IDProposition int (11) Auto_increment  NOT NULL ,
         Nom           Char (25) NOT NULL ,
-        Temperature   Int NOT NULL ,
+        Temperature   Int ,
         Validation    Bool ,
+		Diluant varchar (25) ,
         PRIMARY KEY (IDProposition )
 )ENGINE=InnoDB;
 
