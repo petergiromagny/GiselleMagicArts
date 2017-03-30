@@ -63,6 +63,7 @@ CREATE TABLE Onguent(
 CREATE TABLE Diluant(
         IDDiluant  int (11) Auto_increment  NOT NULL ,
         NomDiluant Char (25) NOT NULL ,
+	PrixDiluant int(4) NOT NULL,
         PRIMARY KEY (IDDiluant )
 )ENGINE=InnoDB;
 
