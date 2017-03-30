@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS `ingredients` (
   `NomIngredient` varchar(32) DEFAULT NULL,
   `QuantiteIngredient` int(8) DEFAULT NULL,
   `FraicheurIngredient` int(11) DEFAULT NULL,
-  `PrixIngredient` int(11) DEFAULT NULL,
+  `PrixIngredient` float(11) DEFAULT NULL,
   `StockIngredient` int(11) DEFAULT NULL,
   PRIMARY KEY (`IDIngredient`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
