@@ -166,8 +166,8 @@ CREATE TABLE se_compose_prepa(
         FraicheurMax      Int ,
         Temps             Int ,
         IDproduit         Int NOT NULL ,
-        IDproduit_Produit Int NOT NULL ,
-        PRIMARY KEY (IDproduit ,IDproduit_Produit )
+        IDproduitFinal Int NOT NULL ,
+        PRIMARY KEY (IDproduit ,IDproduitFinal )
 )ENGINE=InnoDB;
 
 
