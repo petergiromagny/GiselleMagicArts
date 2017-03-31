@@ -43,9 +43,9 @@ CREATE TABLE Diluant(
 #------------------------------------------------------------
 
 CREATE TABLE Recipient(
-        IDrecipient    int (11) Auto_increment  NOT NULL ,
-        NomRecipient   Varchar (255) ,
-        StockRecipient Char (25) NOT NULL ,
+        IDrecipient  int (11) Auto_increment  NOT NULL ,
+        NomRecipient Varchar (255) ,
+        Prix         Float NOT NULL ,
         PRIMARY KEY (IDrecipient )
 )ENGINE=InnoDB;
 
@@ -113,6 +113,7 @@ CREATE TABLE Stock(
         Fraicheur     Int ,
         IDproduit     Int ,
         IDFournisseur Int ,
+        IDrecipient   Int ,
         PRIMARY KEY (IDstock )
 )ENGINE=InnoDB;
 
@@ -157,10 +158,10 @@ CREATE TABLE contient(
 
 
 #------------------------------------------------------------
-# Table: fournit
+# Table: fournit ingre
 #------------------------------------------------------------
 
-CREATE TABLE fournit(
+CREATE TABLE fournit_ingre(
         IDFournisseur Int NOT NULL ,
         IDproduit     Int NOT NULL ,
         PRIMARY KEY (IDFournisseur ,IDproduit )
@@ -207,22 +208,36 @@ CREATE TABLE contientRecipient(
         PRIMARY KEY (IDCommande ,IDrecipient )
 )ENGINE=InnoDB;
 
+
+#------------------------------------------------------------
+# Table: fournit recipient
+#------------------------------------------------------------
+
+CREATE TABLE fournit_recipient(
+        IDFournisseur Int NOT NULL ,
+        IDrecipient   Int NOT NULL ,
+        PRIMARY KEY (IDFournisseur ,IDrecipient )
+)ENGINE=InnoDB;
+
 ALTER TABLE Ingredient ADD CONSTRAINT FK_Ingredient_IDproduit FOREIGN KEY (IDproduit) REFERENCES Produit(IDproduit);
 ALTER TABLE Commande ADD CONSTRAINT FK_Commande_IDClient FOREIGN KEY (IDClient) REFERENCES Client(IDClient);
 ALTER TABLE Proposition ADD CONSTRAINT FK_Proposition_IDClient FOREIGN KEY (IDClient) REFERENCES Client(IDClient);
 ALTER TABLE Stock ADD CONSTRAINT FK_Stock_IDproduit FOREIGN KEY (IDproduit) REFERENCES Produit(IDproduit);
 ALTER TABLE Stock ADD CONSTRAINT FK_Stock_IDFournisseur FOREIGN KEY (IDFournisseur) REFERENCES Fournisseur(IDFournisseur);
+ALTER TABLE Stock ADD CONSTRAINT FK_Stock_IDrecipient FOREIGN KEY (IDrecipient) REFERENCES Recipient(IDrecipient);
 ALTER TABLE Preparation ADD CONSTRAINT FK_Preparation_IDproduit FOREIGN KEY (IDproduit) REFERENCES Produit(IDproduit);
 ALTER TABLE Preparation ADD CONSTRAINT FK_Preparation_IDDiluant FOREIGN KEY (IDDiluant) REFERENCES Diluant(IDDiluant);
 ALTER TABLE Preparation ADD CONSTRAINT FK_Preparation_IDInventeur FOREIGN KEY (IDInventeur) REFERENCES Inventeur(IDInventeur);
 ALTER TABLE Preparation ADD CONSTRAINT FK_Preparation_IDClient FOREIGN KEY (IDClient) REFERENCES Client(IDClient);
 ALTER TABLE contient ADD CONSTRAINT FK_contient_IDCommande FOREIGN KEY (IDCommande) REFERENCES Commande(IDCommande);
 ALTER TABLE contient ADD CONSTRAINT FK_contient_IDproduit FOREIGN KEY (IDproduit) REFERENCES Produit(IDproduit);
-ALTER TABLE fournit ADD CONSTRAINT FK_fournit_IDFournisseur FOREIGN KEY (IDFournisseur) REFERENCES Fournisseur(IDFournisseur);
-ALTER TABLE fournit ADD CONSTRAINT FK_fournit_IDproduit FOREIGN KEY (IDproduit) REFERENCES Produit(IDproduit);
+ALTER TABLE fournit_ingre ADD CONSTRAINT FK_fournit_ingre_IDFournisseur FOREIGN KEY (IDFournisseur) REFERENCES Fournisseur(IDFournisseur);
+ALTER TABLE fournit_ingre ADD CONSTRAINT FK_fournit_ingre_IDproduit FOREIGN KEY (IDproduit) REFERENCES Produit(IDproduit);
 ALTER TABLE se_compose_prepa ADD CONSTRAINT FK_se_compose_prepa_IDproduit FOREIGN KEY (IDproduit) REFERENCES Produit(IDproduit);
 ALTER TABLE se_compose_prepa ADD CONSTRAINT FK_se_compose_prepa_IDproduit_Produit FOREIGN KEY (IDproduit_Produit) REFERENCES Produit(IDproduit);
 ALTER TABLE se_compose_propo ADD CONSTRAINT FK_se_compose_propo_IDProposition FOREIGN KEY (IDProposition) REFERENCES Proposition(IDProposition);
 ALTER TABLE se_compose_propo ADD CONSTRAINT FK_se_compose_propo_IDproduit FOREIGN KEY (IDproduit) REFERENCES Produit(IDproduit);
 ALTER TABLE contientRecipient ADD CONSTRAINT FK_contientRecipient_IDCommande FOREIGN KEY (IDCommande) REFERENCES Commande(IDCommande);
 ALTER TABLE contientRecipient ADD CONSTRAINT FK_contientRecipient_IDrecipient FOREIGN KEY (IDrecipient) REFERENCES Recipient(IDrecipient);
+ALTER TABLE fournit_recipient ADD CONSTRAINT FK_fournit_recipient_IDFournisseur FOREIGN KEY (IDFournisseur) REFERENCES Fournisseur(IDFournisseur);
+ALTER TABLE fournit_recipient ADD CONSTRAINT FK_fournit_recipient_IDrecipient FOREIGN KEY (IDrecipient) REFERENCES Recipient(IDrecipient);
