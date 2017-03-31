@@ -1,0 +1,17 @@
+﻿IDCommande;DateCommande;Statut;PrixTotal;IDClient
+1;2017-02-15;livraison;680;1
+2;2017-03-25;preparation;750;2
+3;2017-01-08;livraison;340;15
+4;2016-12-30;livré;199;5
+5;2017-05-18;preparation;1080;15
+6;2017-01-05;;620;3
+;;;;
+;;;;
+;;;;
+;;;;
+;;;;
+;;;;
+;;;;
+;;;;
+;;;;
+;;;;
