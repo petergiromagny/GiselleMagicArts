@@ -110,9 +110,11 @@ Delimiter ;
 
 --------------------------procedure stocké numero 3
 DELIMITER |
-CREATE PROCEDURE froid()    
+CREATE PROCEDURE decremente()    
 
 begin
+update Stock
+set Fraicheur=Fraicheur-1;
 select *,' fut supprimé'
 from Stock
 where Fraicheur=0;
@@ -121,6 +123,9 @@ delete from Stock where Fraicheur=0;
 
 end|
 Delimiter ;
+
+
+
 
 
 --------------------------fin procedure stocké numero 3
