@@ -4,15 +4,15 @@
 
 
 #------------------------------------------------------------
-# Table: Client
+# Table: Personne
 #------------------------------------------------------------
 
-CREATE TABLE Client(
-        IDClient int (11) Auto_increment  NOT NULL ,
-        Nom      Char (25) NOT NULL ,
-        Prenom   Char (25) NOT NULL ,
-        Adresse  Varchar (25) NOT NULL ,
-        PRIMARY KEY (IDClient )
+CREATE TABLE Personne(
+        IDPersonne int (11) Auto_increment  NOT NULL ,
+        Nom        Char (25) NOT NULL ,
+        Prenom     Char (25) NOT NULL ,
+        Adresse    Varchar (25) NOT NULL ,
+        PRIMARY KEY (IDPersonne )
 )ENGINE=InnoDB;
 
 
@@ -46,6 +46,7 @@ CREATE TABLE Recipient(
         IDrecipient  int (11) Auto_increment  NOT NULL ,
         NomRecipient Varchar (255) ,
         Prix         Float NOT NULL ,
+        Stock        Int ,
         PRIMARY KEY (IDrecipient )
 )ENGINE=InnoDB;
 
@@ -59,7 +60,7 @@ CREATE TABLE Commande(
         DateCommande Date NOT NULL ,
         Statut       Char (25) ,
         PrixTotal    Float NOT NULL ,
-        IDClient     Int ,
+        IDPersonne   Int ,
         PRIMARY KEY (IDCommande )
 )ENGINE=InnoDB;
 
@@ -77,18 +78,6 @@ CREATE TABLE Fournisseur(
 
 
 #------------------------------------------------------------
-# Table: Inventeur
-#------------------------------------------------------------
-
-CREATE TABLE Inventeur(
-        IDInventeur  int (11) Auto_increment  NOT NULL ,
-        Nom          Char (25) NOT NULL ,
-        NumeroPermis Int NOT NULL ,
-        PRIMARY KEY (IDInventeur )
-)ENGINE=InnoDB;
-
-
-#------------------------------------------------------------
 # Table: Proposition
 #------------------------------------------------------------
 
@@ -98,7 +87,7 @@ CREATE TABLE Proposition(
         Temperature   Int ,
         Validation    Bool ,
         Diluant       Varchar (25) ,
-        IDClient      Int ,
+        IDPersonne    Int ,
         PRIMARY KEY (IDProposition )
 )ENGINE=InnoDB;
 
@@ -113,7 +102,6 @@ CREATE TABLE Stock(
         Fraicheur     Int ,
         IDproduit     Int ,
         IDFournisseur Int ,
-        IDrecipient   Int ,
         PRIMARY KEY (IDstock )
 )ENGINE=InnoDB;
 
@@ -138,8 +126,7 @@ CREATE TABLE Preparation(
         Temperature Int ,
         IDproduit   Int NOT NULL ,
         IDDiluant   Int NOT NULL ,
-        IDInventeur Int ,
-        IDClient    Int ,
+        IDPersonne  Int ,
         PRIMARY KEY (IDproduit )
 )ENGINE=InnoDB;
 
@@ -179,8 +166,8 @@ CREATE TABLE se_compose_prepa(
         FraicheurMax      Int ,
         Temps             Int ,
         IDproduit         Int NOT NULL ,
-        IDproduitFinal Int NOT NULL ,
-        PRIMARY KEY (IDproduit ,IDproduitFinal )
+        IDproduit_Produit Int NOT NULL ,
+        PRIMARY KEY (IDproduit ,IDproduit_Produit )
 )ENGINE=InnoDB;
 
 
@@ -192,7 +179,7 @@ CREATE TABLE se_compose_propo(
         QteIngredient Int ,
         FraicheurMin  Int ,
         FraicheurMax  Int ,
-		Temps Int ,
+        Temps         Int ,
         IDProposition Int NOT NULL ,
         IDproduit     Int NOT NULL ,
         PRIMARY KEY (IDProposition ,IDproduit )
@@ -210,15 +197,13 @@ CREATE TABLE fournit_recipient(
 )ENGINE=InnoDB;
 
 ALTER TABLE Ingredient ADD CONSTRAINT FK_Ingredient_IDproduit FOREIGN KEY (IDproduit) REFERENCES Produit(IDproduit);
-ALTER TABLE Commande ADD CONSTRAINT FK_Commande_IDClient FOREIGN KEY (IDClient) REFERENCES Client(IDClient);
-ALTER TABLE Proposition ADD CONSTRAINT FK_Proposition_IDClient FOREIGN KEY (IDClient) REFERENCES Client(IDClient);
+ALTER TABLE Commande ADD CONSTRAINT FK_Commande_IDPersonne FOREIGN KEY (IDPersonne) REFERENCES Personne(IDPersonne);
+ALTER TABLE Proposition ADD CONSTRAINT FK_Proposition_IDPersonne FOREIGN KEY (IDPersonne) REFERENCES Personne(IDPersonne);
 ALTER TABLE Stock ADD CONSTRAINT FK_Stock_IDproduit FOREIGN KEY (IDproduit) REFERENCES Produit(IDproduit);
 ALTER TABLE Stock ADD CONSTRAINT FK_Stock_IDFournisseur FOREIGN KEY (IDFournisseur) REFERENCES Fournisseur(IDFournisseur);
-ALTER TABLE Stock ADD CONSTRAINT FK_Stock_IDrecipient FOREIGN KEY (IDrecipient) REFERENCES Recipient(IDrecipient);
 ALTER TABLE Preparation ADD CONSTRAINT FK_Preparation_IDproduit FOREIGN KEY (IDproduit) REFERENCES Produit(IDproduit);
 ALTER TABLE Preparation ADD CONSTRAINT FK_Preparation_IDDiluant FOREIGN KEY (IDDiluant) REFERENCES Diluant(IDDiluant);
-ALTER TABLE Preparation ADD CONSTRAINT FK_Preparation_IDInventeur FOREIGN KEY (IDInventeur) REFERENCES Inventeur(IDInventeur);
-ALTER TABLE Preparation ADD CONSTRAINT FK_Preparation_IDClient FOREIGN KEY (IDClient) REFERENCES Client(IDClient);
+ALTER TABLE Preparation ADD CONSTRAINT FK_Preparation_IDPersonne FOREIGN KEY (IDPersonne) REFERENCES Personne(IDPersonne);
 ALTER TABLE contient ADD CONSTRAINT FK_contient_IDCommande FOREIGN KEY (IDCommande) REFERENCES Commande(IDCommande);
 ALTER TABLE contient ADD CONSTRAINT FK_contient_IDproduit FOREIGN KEY (IDproduit) REFERENCES Produit(IDproduit);
 ALTER TABLE contient ADD CONSTRAINT FK_contient_IDrecipient FOREIGN KEY (IDrecipient) REFERENCES Recipient(IDrecipient);
