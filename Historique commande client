@@ -1,0 +1,4 @@
+ SELECT Commande.*, Client.Nom, Client.prenom, Client.Adresse
+ FROM Commande, Client
+ WHERE Commande.IDClient = Client.IDClient
+ AND Client.Nom = 'Naessens';
