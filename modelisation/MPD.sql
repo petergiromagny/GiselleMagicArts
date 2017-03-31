@@ -192,6 +192,7 @@ CREATE TABLE se_compose_propo(
         QteIngredient Int ,
         FraicheurMin  Int ,
         FraicheurMax  Int ,
+		Temps Int ,
         IDProposition Int NOT NULL ,
         IDproduit     Int NOT NULL ,
         PRIMARY KEY (IDProposition ,IDproduit )
