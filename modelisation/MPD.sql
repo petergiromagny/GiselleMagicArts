@@ -109,7 +109,7 @@ CREATE TABLE Proposition(
 
 CREATE TABLE Stock(
         IDstock       int (11) Auto_increment  NOT NULL ,
-        NbSotck       Int NOT NULL ,
+        NbStock       Int NOT NULL ,
         Fraicheur     Int ,
         IDproduit     Int ,
         IDFournisseur Int ,
@@ -172,10 +172,10 @@ CREATE TABLE fournit(
 #------------------------------------------------------------
 
 CREATE TABLE se_compose_prepa(
-        qteIngredient     Int ,
-        fraicheurMin      Int ,
-        fraicheurMax      Int ,
-        temps             Int ,
+        QteIngredient     Int ,
+        FraicheurMin      Int ,
+        FraicheurMax      Int ,
+        Temps             Int ,
         IDproduit         Int NOT NULL ,
         IDproduit_Produit Int NOT NULL ,
         PRIMARY KEY (IDproduit ,IDproduit_Produit )
@@ -187,9 +187,9 @@ CREATE TABLE se_compose_prepa(
 #------------------------------------------------------------
 
 CREATE TABLE se_compose_propo(
-        qteIngredient Int ,
-        fraicheurMin  Int ,
-        fraicheurMax  Int ,
+        QteIngredient Int ,
+        FraicheurMin  Int ,
+        FraicheurMax  Int ,
         IDProposition Int NOT NULL ,
         IDproduit     Int NOT NULL ,
         PRIMARY KEY (IDProposition ,IDproduit )
@@ -201,7 +201,7 @@ CREATE TABLE se_compose_propo(
 #------------------------------------------------------------
 
 CREATE TABLE contientRecipient(
-        quantite    Int ,
+        Quantite    Int ,
         IDCommande  Int NOT NULL ,
         IDrecipient Int NOT NULL ,
         PRIMARY KEY (IDCommande ,IDrecipient )
