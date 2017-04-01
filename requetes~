@@ -13,18 +13,17 @@ CREATE PROCEDURE affichage_stocks(in IDIngredient_add int, in nbr_add int)
     
 BEGIN
     	
-    select 'avant',NomProduit, NbStock
+    select NomProduit, NbStock
     from Stock,Ingredient,Produit
     where Stock.IDproduit = Ingredient.IDproduit and Ingredient.IDproduit = Produit.IDproduit;
 
 
-    //update Ingredients
-    //set StockIngredient = StockIngredient +  nbr_add
-    //where IDIngredient = IDIngredient_add;
+    update Ingredients
+    set StockIngredient = StockIngredient +  nbr_add
+    where IDIngredient = IDIngredient_add;
 
-    select 'avant',NomProduit, NbStock
-    from Stock,Ingredient,Produit
-    where Stock.IDproduit = Ingredient.IDproduit and Ingredient.IDproduit = Produit.IDproduit;
+    select 'aprés' , NomIngredient,StockIngredient -- affichage du stock aprés
+    from Ingredients;
   
 END|   
 Delimiter ;
