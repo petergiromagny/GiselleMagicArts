@@ -1,3 +1,11 @@
+-----------------------------------------------
+-- Procédure : ajouter_recette
+----------------------------------------------- 
+
+-----------------------------------------------
+-- Définition
+----------------------------------------------- 
+
 DELIMITER |
 CREATE PROCEDURE ajouter_recette(
   IN nom char(25),
@@ -32,5 +40,9 @@ VALUES
 (qte3, fraichMin3,fraichMax3,temps3,@IDPropo,IDingredient3);
 END |
 DELIMITER ;
+
+-----------------------------------------------
+-- Commande de test
+----------------------------------------------- 
 
 CALL ajouter_recette('Potion de mort',100,'Vin',35,5,10,5,10,36,10,5,1,5,68,1,5,10,2,20);
