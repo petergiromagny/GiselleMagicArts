@@ -1,5 +1,5 @@
 -----------------------------------------------
--- Procédure : ajouter_recette
+-- Procédure : ajouter_proposition
 ----------------------------------------------- 
 
 -----------------------------------------------
@@ -7,7 +7,7 @@
 ----------------------------------------------- 
 
 DELIMITER |
-CREATE PROCEDURE ajouter_recette(
+CREATE PROCEDURE ajouter_proposition(
   IN nom char(25),
   IN temperature int(11),
   IN diluant varchar(25),
@@ -29,8 +29,13 @@ CREATE PROCEDURE ajouter_recette(
   IN inventeur varchar(255)
 )
 BEGIN
+
+SELECT IDDiluant INTO @IDdiluant
+FROM Diluant
+WHERE NomDiluant = diluant;
+
 INSERT INTO Proposition(`Nom`,`Temperature`,`Diluant`,`IDPersonne`)
-SELECT nom,temperature,diluant,Personne.IDPersonne
+SELECT nom,temperature,@IDdiluant,Personne.IDPersonne
 FROM Personne
 WHERE Personne.Nom = inventeur;
 
@@ -59,4 +64,4 @@ DELIMITER ;
 -- Commande de test
 ----------------------------------------------- 
 
-CALL ajouter_recette('Potion de test',100,'Vin','Sardonyx',5,10,5,10,'Azurite',10,5,1,5,'Zircon',1,5,10,2,'Merlin');
+CALL ajouter_proposition('Potion de test',100,'Vin','Sardonyx',5,10,5,10,'Azurite',10,5,1,5,'Zircon',1,5,10,2,'Merlin');

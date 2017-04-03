@@ -85,7 +85,6 @@ CREATE TABLE Proposition(
         IDProposition int (11) Auto_increment  NOT NULL ,
         Nom           Char (25) NOT NULL ,
         Temperature   Int ,
-        Validation    Bool ,
         Diluant       Varchar (25) ,
         IDPersonne    Int ,
         PRIMARY KEY (IDProposition )
@@ -124,6 +123,7 @@ CREATE TABLE Produit(
 
 CREATE TABLE Preparation(
         Temperature Int ,
+		Stock Int ,
         IDproduit   Int NOT NULL ,
         IDDiluant   Int NOT NULL ,
         IDPersonne  Int ,
