@@ -1,4 +1,4 @@
-﻿IDproposition,Nom,Temperature,Validation,DIluant,IDClient
-1,Potion de prosit,500,,Vin,5
-2,Onguent de mysql,,,,18
-3,Huile de magicarts,10,,Eau,12
+﻿IDproposition,Nom,Temperature,DIluant,IDClient
+1,Potion de prosit,500,1,5
+2,Onguent de mysql,,,18
+3,Huile de magicarts,10,4,12

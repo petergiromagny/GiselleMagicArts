@@ -124,7 +124,7 @@ CREATE TABLE Produit(
 CREATE TABLE Preparation(
         Temperature Int ,
         IDproduit   Int NOT NULL ,
-        IDDiluant   Int NOT NULL ,
+        IDDiluant   Int ,
         IDPersonne  Int ,
         PRIMARY KEY (IDproduit )
 )ENGINE=InnoDB;
