@@ -60,7 +60,7 @@ CREATE TABLE Commande(
         DateCommande Date NOT NULL ,
         Statut       Char (25) ,
         PrixTotal    Float NOT NULL ,
-        IDPersonne   Int ,
+        IDPersonne   Int NOT NULL ,
         PRIMARY KEY (IDCommande )
 )ENGINE=InnoDB;
 
@@ -85,7 +85,7 @@ CREATE TABLE Proposition(
         IDProposition int (11) Auto_increment  NOT NULL ,
         Nom           Char (25) NOT NULL ,
         Temperature   Int ,
-        Diluant       Varchar (25) ,
+        Diluant       Int ,
         IDPersonne    Int ,
         PRIMARY KEY (IDProposition )
 )ENGINE=InnoDB;
@@ -123,7 +123,6 @@ CREATE TABLE Produit(
 
 CREATE TABLE Preparation(
         Temperature Int ,
-		Stock Int ,
         IDproduit   Int NOT NULL ,
         IDDiluant   Int NOT NULL ,
         IDPersonne  Int ,
@@ -146,10 +145,10 @@ CREATE TABLE contient(
 
 
 #------------------------------------------------------------
-# Table: fournit ingre
+# Table: fournit
 #------------------------------------------------------------
 
-CREATE TABLE fournit_ingre(
+CREATE TABLE fournit(
         IDFournisseur Int NOT NULL ,
         IDproduit     Int NOT NULL ,
         PRIMARY KEY (IDFournisseur ,IDproduit )
@@ -201,17 +200,17 @@ ALTER TABLE Commande ADD CONSTRAINT FK_Commande_IDPersonne FOREIGN KEY (IDPerson
 ALTER TABLE Proposition ADD CONSTRAINT FK_Proposition_IDPersonne FOREIGN KEY (IDPersonne) REFERENCES Personne(IDPersonne);
 ALTER TABLE Stock ADD CONSTRAINT FK_Stock_IDproduit FOREIGN KEY (IDproduit) REFERENCES Produit(IDproduit);
 ALTER TABLE Stock ADD CONSTRAINT FK_Stock_IDFournisseur FOREIGN KEY (IDFournisseur) REFERENCES Fournisseur(IDFournisseur);
-ALTER TABLE Preparation ADD CONSTRAINT FK_Preparation_IDproduit FOREIGN KEY (IDproduit) REFERENCES Produit(IDproduit) ON DELETE CASCADE;
+ALTER TABLE Preparation ADD CONSTRAINT FK_Preparation_IDproduit FOREIGN KEY (IDproduit) REFERENCES Produit(IDproduit) ON DELETE CASCADE ;
 ALTER TABLE Preparation ADD CONSTRAINT FK_Preparation_IDDiluant FOREIGN KEY (IDDiluant) REFERENCES Diluant(IDDiluant);
 ALTER TABLE Preparation ADD CONSTRAINT FK_Preparation_IDPersonne FOREIGN KEY (IDPersonne) REFERENCES Personne(IDPersonne);
 ALTER TABLE contient ADD CONSTRAINT FK_contient_IDCommande FOREIGN KEY (IDCommande) REFERENCES Commande(IDCommande);
 ALTER TABLE contient ADD CONSTRAINT FK_contient_IDproduit FOREIGN KEY (IDproduit) REFERENCES Produit(IDproduit);
 ALTER TABLE contient ADD CONSTRAINT FK_contient_IDrecipient FOREIGN KEY (IDrecipient) REFERENCES Recipient(IDrecipient);
-ALTER TABLE fournit_ingre ADD CONSTRAINT FK_fournit_ingre_IDFournisseur FOREIGN KEY (IDFournisseur) REFERENCES Fournisseur(IDFournisseur);
-ALTER TABLE fournit_ingre ADD CONSTRAINT FK_fournit_ingre_IDproduit FOREIGN KEY (IDproduit) REFERENCES Produit(IDproduit);
+ALTER TABLE fournit ADD CONSTRAINT FK_fournit_IDFournisseur FOREIGN KEY (IDFournisseur) REFERENCES Fournisseur(IDFournisseur);
+ALTER TABLE fournit ADD CONSTRAINT FK_fournit_IDproduit FOREIGN KEY (IDproduit) REFERENCES Produit(IDproduit);
 ALTER TABLE se_compose_prepa ADD CONSTRAINT FK_se_compose_prepa_IDproduit FOREIGN KEY (IDproduit) REFERENCES Produit(IDproduit);
-ALTER TABLE se_compose_prepa ADD CONSTRAINT FK_se_compose_prepa_IDproduitFinal FOREIGN KEY (IDproduitFinal) REFERENCES Produit(IDproduit) ON DELETE CASCADE;
+ALTER TABLE se_compose_prepa ADD CONSTRAINT FK_se_compose_prepa_IDproduitFinal FOREIGN KEY (IDproduitFinal) REFERENCES Produit(IDproduit) ON DELETE CASCADE ;
 ALTER TABLE se_compose_propo ADD CONSTRAINT FK_se_compose_propo_IDProposition FOREIGN KEY (IDProposition) REFERENCES Proposition(IDProposition);
-ALTER TABLE se_compose_propo ADD CONSTRAINT FK_se_compose_propo_IDproduit FOREIGN KEY (IDproduit) REFERENCES Produit(IDproduit) ON DELETE CASCADE;
+ALTER TABLE se_compose_propo ADD CONSTRAINT FK_se_compose_propo_IDproduit FOREIGN KEY (IDproduit) REFERENCES Produit(IDproduit) ON DELETE CASCADE ;
 ALTER TABLE fournit_recipient ADD CONSTRAINT FK_fournit_recipient_IDFournisseur FOREIGN KEY (IDFournisseur) REFERENCES Fournisseur(IDFournisseur);
 ALTER TABLE fournit_recipient ADD CONSTRAINT FK_fournit_recipient_IDrecipient FOREIGN KEY (IDrecipient) REFERENCES Recipient(IDrecipient);
