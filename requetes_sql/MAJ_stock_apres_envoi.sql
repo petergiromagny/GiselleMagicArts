@@ -18,6 +18,12 @@ AND Commande.Statut = 'preparation';
 
 
 
+UPDATE Commande
+SET Statut = 'livraison'
+WHERE Commande.Statut = 'preparation' AND Commande.IDCommande = NumeroCommande;
+
+
+
 SELECT DISTINCT Commande.IDCommande, Commande.Statut, contient.IDproduit, contient.QuantiteCommande, 
 Stock.IDstock, Stock.NbStock
 FROM Commande, contient,  Stock,  Produit
@@ -25,10 +31,6 @@ WHERE Commande.IDCommande = contient.IDCommande AND contient.IDproduit = Produit
 AND Commande.IDCommande = NumeroCommande AND Stock.IDproduit = contient.IDproduit;
 
 
-
-UPDATE Commande
-SET Statut = 'livraison'
-WHERE Commande.Statut = 'preparation' AND Commande.IDCommande = NumeroCommande;
 
 END$
 DELIMITER ;
