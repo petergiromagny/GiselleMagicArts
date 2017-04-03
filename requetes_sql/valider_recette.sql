@@ -1,35 +1,17 @@
 -----------------------------------------------
 -- Nom : valider_recette
--- Type : trigger
+-- Type : procedure
 -----------------------------------------------
 
 -----------------------------------------------
--- D�finition
+-- Definition
 -----------------------------------------------
 
 DELIMITER |
-CREATE TRIGGER valider_recette
-AFTER UPDATE ON Proposition
-FOR EACH ROW
+CREATE PROCEDURE valider_recette (IN IDpropo INT(11))
 BEGIN
 
-  INSERT INTO Produit (`NomProduit`)
-  SELECT Nom
-  FROM Proposition
-  WHERE Validation = 1;
-
-  SELECT MAX(IDProduit) INTO @IDproduitFinal
-  FROM Produit;
-
-  INSERT INTO Preparation
-  SELECT Temperature, @IDproduitFinal, Diluant, IDPersonne
-  FROM Proposition
-  WHERE Validation = 1;
-
-  INSERT INTO se_compose_prepa
-  SELECT QteIngredient, FraicheurMin, FraicheurMax, Temps, IDproduit, @IDproduitFinal
-  FROM se_compose_propo INNER JOIN Proposition ON se_compose_propo.IDProposition = Proposition.IDProposition
-  WHERE Validation = 1;
+  UPDATE Proposition SET Validation = 1 WHERE IDProposition = IDpropo;
 
 END |
 DELIMITER ;
