@@ -210,7 +210,7 @@ ALTER TABLE fournit ADD CONSTRAINT FK_fournit_IDFournisseur FOREIGN KEY (IDFourn
 ALTER TABLE fournit ADD CONSTRAINT FK_fournit_IDproduit FOREIGN KEY (IDproduit) REFERENCES Produit(IDproduit);
 ALTER TABLE se_compose_prepa ADD CONSTRAINT FK_se_compose_prepa_IDproduit FOREIGN KEY (IDproduit) REFERENCES Produit(IDproduit);
 ALTER TABLE se_compose_prepa ADD CONSTRAINT FK_se_compose_prepa_IDproduitFinal FOREIGN KEY (IDproduitFinal) REFERENCES Produit(IDproduit) ON DELETE CASCADE ;
-ALTER TABLE se_compose_propo ADD CONSTRAINT FK_se_compose_propo_IDProposition FOREIGN KEY (IDProposition) REFERENCES Proposition(IDProposition);
-ALTER TABLE se_compose_propo ADD CONSTRAINT FK_se_compose_propo_IDproduit FOREIGN KEY (IDproduit) REFERENCES Produit(IDproduit) ON DELETE CASCADE ;
+ALTER TABLE se_compose_propo ADD CONSTRAINT FK_se_compose_propo_IDProposition FOREIGN KEY (IDProposition) REFERENCES Proposition(IDProposition) ON DELETE CASCADE ;
+ALTER TABLE se_compose_propo ADD CONSTRAINT FK_se_compose_propo_IDproduit FOREIGN KEY (IDproduit) REFERENCES Produit(IDproduit);
 ALTER TABLE fournit_recipient ADD CONSTRAINT FK_fournit_recipient_IDFournisseur FOREIGN KEY (IDFournisseur) REFERENCES Fournisseur(IDFournisseur);
 ALTER TABLE fournit_recipient ADD CONSTRAINT FK_fournit_recipient_IDrecipient FOREIGN KEY (IDrecipient) REFERENCES Recipient(IDrecipient);
