@@ -9,26 +9,24 @@
 
 
 DELIMITER | -- On change le délimiteur
-CREATE PROCEDURE affichage_stocks(in NomIngredient_add char(30), in nbr_add int, in fraicheur_add int)    
+CREATE PROCEDURE affichage_stocks(in NomIngredient_add char(30), in nbr_add int)    
     
 BEGIN
     	
-    select 'avant',NomProduit, NbStock,Fraicheur
+    select distinct 'avant',NomProduit, NbStock
     from Stock,Ingredient,Produit
-    where Stock.IDproduit = Ingredient.IDproduit and Ingredient.IDproduit = Produit.IDproduit and Produit.NomProduit=NomIngredient_add;
+    where Stock.IDproduit = Produit.IDproduit and Produit.NomProduit=NomIngredient_add;
 
 
     update Stock 
-    join Produit on Stock.Idproduit=Produit.IDproduit and NomProduit=NomIngredient_add and Stock.Fraicheur=fraicheur_add 
+    join Produit on Stock.Idproduit=Produit.IDproduit and NomProduit=NomIngredient_add 
     set NbStock=NbStock+nbr_add;
 
+	
 
-
-    select 'aprés',NomProduit, NbStock,Fraicheur
+    select distinct 'aprés',NomProduit, NbStock
     from Stock,Ingredient,Produit
     where Stock.IDproduit = Ingredient.IDproduit and Ingredient.IDproduit = Produit.IDproduit and Produit.NomProduit=NomIngredient_add;
-    
-    select distinct NomProduit,NbStock,Fraicheur from Produit,Stock where Produit.IDproduit=Stock.IDproduit;
   
 END|   
 Delimiter ;
@@ -74,20 +72,16 @@ Delimiter ;
 
 
 --------------------------procedure stocké numero 3
-DELIMITER |
-CREATE PROCEDURE decremente()    
-
+delimiter |
+create procedure perime()
 begin
 update Stock
 set Fraicheur=Fraicheur-1;
-select *,' fut supprimé'
-from Stock
-where Fraicheur=0;
+
+select distinct NomProduit,NbStock,' fut supprimé' from Stock,Produit where Fraicheur=0 and Stock.Idproduit = Produit.IDproduit;
 delete from Stock where Fraicheur=0;
-
-
 end|
-Delimiter ;
+delimiter ;
 
 
 
