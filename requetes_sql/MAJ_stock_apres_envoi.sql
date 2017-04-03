@@ -14,7 +14,7 @@ AND Commande.Statut = 'preparation';
 UPDATE Stock, contient, Commande
 SET Stock.NbStock = Stock.NbStock-contient.QuantiteCommande
 WHERE contient.IDproduit = Stock.IDproduit AND contient.IDCommande = NumeroCommande
-AND Commande.Statut = 'preparation';
+AND Commande.Statut = 'preparation' and contient.IDCommande=Commande.IDCommande;
 
 
 
