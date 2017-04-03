@@ -34,3 +34,9 @@ PHOTO=affichage_stocks.png
 
 
 Suppression d’un ingrédient arrivé à expiration (pourra être éventuellement automatisé)
+le programme permet a son utilisation de pouvoir decrementé d'unje unité la fraicheur , on peut estime que giselle à créé un script permettant 
+d'executer ce script tout les soirs a minuit. 
+
+puis la requete va suprimer les éléments dont la fraicheur sera egale a 0 en effectuant une jointure entre Stock et Produit.
+
+photo=expiration.png
