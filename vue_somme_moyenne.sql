@@ -6,6 +6,6 @@ WHERE Temperature > 0
 GROUP BY IDproduit;
 
 CREATE VIEW Moyenne_ingredient_potion
-(Produit, Valeur)
+(Valeur)
 AS SELECT AVG(Valeur)
 FROM Somme;
