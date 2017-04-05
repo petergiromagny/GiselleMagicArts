@@ -17,26 +17,6 @@ PHOTO=DILUANT.PNG
 
 
 
-Affichage du stock des ingrédients et mise à jour à la réception de nouveaux ingrédients
-
-cette fonction prend comme parametre le nom de l'ingredient ainsi que sa quantité à ajouter et sa fraicheur . 
-tout d'abord nous affichons le stock de l'ingredient en question avant tout changement avec une jointure entre Stock , Ingredient, et produit et ensuite une condition sur le nom de l'ingredient concerné , nou safficherons la même requete aprés la modification
-
-
-ensuite nous modifions le stock en effectuant une jointure entre le stock et le produit où nous cherchons a ajouter la varibale nbr_add a la qunatité du stock de l'ingredient desiré et à une fraicheur existante dans la base de données
-
-
-ensuite nous affichons l'intégralité des articles aprés modifications pour permette un inventaire des stocks.
-PHOTO=affichage_stocks.png
 
 
 
-
-
-Suppression d’un ingrédient arrivé à expiration (pourra être éventuellement automatisé)
-le programme permet a son utilisation de pouvoir decrementé d'unje unité la fraicheur , on peut estime que giselle à créé un script permettant 
-d'executer ce script tout les soirs a minuit. 
-
-puis la requete va suprimer les éléments dont la fraicheur sera egale a 0 en effectuant une jointure entre Stock et Produit.
-
-photo=expiration.png
