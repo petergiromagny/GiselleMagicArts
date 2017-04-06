@@ -1,0 +1,17 @@
+Cette procedure permet de mettre a jour le stock lors de l'envoi d'une commande, 
+Il prend en argument le numero de la commande concerné. 
+
+La premiere partie de la procedure stocké permet d'afficher une commande ainsi que son statut , ses produits , quantités et sa quantité dans le stock 
+en effectuant une jointure entre les tables Commande, Stock et Produit avec un lien entre les ID commande et les IDproduit ainsi que le statut qui se doit d'etre en preparation.
+
+ensuite le stock du/des produits concernés se met a jour en retirant la quantité presente dans la commande pour chaque ingredient ,   
+
+puis le statut de la commande se passe en livraison si le statut etait en preparation et que le numero correspond à l'argument.
+
+Ensuite nous affichons la commande avec le statut qui est modifié
+
+image=envoi_commande.png
+
+
+
+
